@@ -38,8 +38,8 @@ http://www.opensource.apple.com/source/tcl/tcl-14/tcl/license.terms
 
 #include <Python.h>
 #include <stdio.h>
-#include <ultrajson.h>
 #include <datetime.h>
+#include <ultrajson.h>
 
 #define EPOCH_ORD 719163
 
@@ -129,7 +129,7 @@ static void *PyDateTimeToINT64(JSOBJ _obj, JSONTypeContext *tc, void *outValue, 
 
   date = PyDate_FromDate(y, m, 1);
   ord = PyObject_CallMethod(date, "toordinal", NULL);
-  days = ord - EPOCH_ORD + d - 1;
+  days = PyLong_AsLong(ord) - EPOCH_ORD + d - 1;
   Py_DECREF(date);
   Py_DECREF(ord);
   *( (JSINT64 *) outValue) = (((JSINT64) ((days * 24 + h) * 60 + mn)) * 60 + s) * 1000;
@@ -148,7 +148,7 @@ static void *PyDateToINT64(JSOBJ _obj, JSONTypeContext *tc, void *outValue, size
 
   date = PyDate_FromDate(y, m, 1);
   ord = PyObject_CallMethod(date, "toordinal", NULL);
-  days = ord - EPOCH_ORD + d - 1;
+  days = PyLong_AsLong(ord) - EPOCH_ORD + d - 1;
   Py_DECREF(date);
   Py_DECREF(ord);
   *( (JSINT64 *) outValue) = ((JSINT64) days * 86400000);
