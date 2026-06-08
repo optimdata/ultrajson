@@ -129,7 +129,7 @@ static void *PyDateTimeToINT64(JSOBJ _obj, JSONTypeContext *tc, void *outValue, 
 
   date = PyDate_FromDate(y, m, 1);
   ord = PyObject_CallMethod(date, "toordinal", NULL);
-  days = PyLong_AsLong(ord) - EPOCH_ORD + d - 1;
+  days = PyInt_AsLong(ord) - EPOCH_ORD + d - 1;
   Py_DECREF(date);
   Py_DECREF(ord);
   *( (JSINT64 *) outValue) = (((JSINT64) ((days * 24 + h) * 60 + mn)) * 60 + s) * 1000;
@@ -148,7 +148,7 @@ static void *PyDateToINT64(JSOBJ _obj, JSONTypeContext *tc, void *outValue, size
 
   date = PyDate_FromDate(y, m, 1);
   ord = PyObject_CallMethod(date, "toordinal", NULL);
-  days = PyLong_AsLong(ord) - EPOCH_ORD + d - 1;
+  days = PyInt_AsLong(ord) - EPOCH_ORD + d - 1;
   Py_DECREF(date);
   Py_DECREF(ord);
   *( (JSINT64 *) outValue) = ((JSINT64) days * 86400000);
