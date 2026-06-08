@@ -39,6 +39,7 @@ http://www.opensource.apple.com/source/tcl/tcl-14/tcl/license.terms
 #include <Python.h>
 #include <stdio.h>
 #include <ultrajson.h>
+#include <datetime.h>
 
 #define EPOCH_ORD 719163
 
